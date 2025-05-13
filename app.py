@@ -17,12 +17,12 @@ if uploaded_file:
         st.subheader("Pré-visualização dos dados:")
         st.dataframe(df.head())
 
-        cnpjs = df['CNPJ'].dropna().unique()
+        cnpjs = df['Documento'].dropna().unique()
         selected_cnpj = st.selectbox("Selecione um CNPJ para calcular a multa:", cnpjs)
 
-        contratos = df[df['CNPJ'] == selected_cnpj]
+        contratos = df[df['Documento'] == selected_cnpj]
 
-        required_columns = ['CNPJ', 'Data Primeiro Faturamento', 'Quantidade Licenças', 'Preço Unitário', 'Faturas Restantes']
+        required_columns = ['Documento', 'Data Primeiro Faturamento', 'Quantidade Licenças', 'Preço Unitário', 'Faturas Restantes']
         if not all(col in contratos.columns for col in required_columns):
             st.error(f"A planilha deve conter as colunas: {', '.join(required_columns)}")
         else:
